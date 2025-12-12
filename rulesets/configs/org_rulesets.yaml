@@ -1,0 +1,87 @@
+organization_rulesets:
+  # Organization-level rulesets that apply to multiple repositories
+
+  main-branch-protection:
+    name: "Main Branch Protection"
+    enforcement: "disabled"  # active, disabled, evaluate
+    # Note: Organization rulesets require GitHub Team/Enterprise
+    # Set to "disabled" for free tier, change to "active" after upgrading
+    target: "branch"
+
+    # Target repositories - can use patterns
+    # Options: all, none, or specify repository IDs/names
+    bypass_actors: []
+      # - actor_id: 5  # Repository admin
+      #   actor_type: "RepositoryRole"
+      #   bypass_mode: "always"
+
+    conditions:
+      ref_name:
+        include:
+          - "~DEFAULT_BRANCH"  # Matches the default branch (usually main)
+          - "refs/heads/main"
+        exclude: []
+
+      # Repository criteria - which repos this applies to
+      repository_name:
+        include: ["*"]  # Apply to all repos
+        exclude: []
+        # Or be more specific:
+        # include: ["github-org-*", "terraform-*"]
+        # exclude: ["*-archive", "*-deprecated"]
+
+    # Rules
+    rules:
+      creation: false  # Don't block creation
+      update: true    # Require pull request for updates
+      deletion: true  # Block deletion
+      required_linear_history: true
+      required_signatures: false
+      non_fast_forward: true  # Prevent force pushes
+
+      # Pull Request requirements
+      pull_request:
+        required_approving_review_count: 1
+        dismiss_stale_reviews_on_push: true
+        require_code_owner_review: false
+        require_last_push_approval: false
+        required_review_thread_resolution: true
+
+      # Status checks
+      required_status_checks:
+        strict_required_status_checks_policy: true
+        required_checks: []
+          # Add your CI/CD checks here:
+          # - context: "ci/terraform-validate"
+          # - context: "ci/terraform-fmt"
+          # - context: "ci/tests"
+
+  # Example: Protection for release branches
+  # release-branch-protection:
+  #   name: "Release Branch Protection"
+  #   enforcement: "active"
+  #   target: "branch"
+  #
+  #   conditions:
+  #     ref_name:
+  #       include:
+  #         - "refs/heads/release/*"
+  #         - "refs/heads/hotfix/*"
+  #       exclude: []
+  #     repository_name:
+  #       include: ["*"]
+  #       exclude: []
+  #
+  #   rules:
+  #     creation: false
+  #     update: true
+  #     deletion: true
+  #     required_linear_history: false
+  #     required_signatures: false
+  #
+  #     pull_request:
+  #       required_approving_review_count: 2
+  #       dismiss_stale_reviews_on_push: true
+  #       require_code_owner_review: true
+  #       require_last_push_approval: false
+  #       required_review_thread_resolution: true
