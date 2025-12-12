@@ -1,0 +1,78 @@
+repositories:
+  # Real repositories for Automation Dojo
+
+  example-without-ruleset:
+    name: "example-without-ruleset"
+    description: "Example repository without rulesets"
+    visibility: "private"
+    has_issues: true
+    has_discussions: false
+    has_projects: true
+    has_wiki: false
+    has_downloads: true
+    allow_merge_commit: true
+    allow_squash_merge: true
+    allow_rebase_merge: true
+    allow_auto_merge: false
+    delete_branch_on_merge: true
+    archived: false
+    topics:
+      - "terraform"
+      - "github"
+      - "rulesets"
+      - "terraform"
+    vulnerability_alerts: true
+    default_branch: "main"
+
+  example-with-ruleset:
+    name: "example-with-ruleset"
+    description: "Example repository with rulesets"
+    visibility: "public"
+    has_issues: true
+    has_discussions: true
+    has_projects: false
+    has_wiki: false
+    has_downloads: true
+    allow_merge_commit: true
+    allow_squash_merge: true
+    allow_rebase_merge: true
+    allow_auto_merge: false
+    delete_branch_on_merge: true
+    archived: false
+    topics:
+      - "terraform"
+      - "github"
+      - "rulesets"
+      - "terraform"
+    vulnerability_alerts: true
+    default_branch: "main"
+
+    # Repository Rulesets (available for public repos on free tier)
+    rulesets:
+      main-protection:
+        name: "Main Branch Protection"
+        enforcement: "active"
+        target: "branch"
+        branch_patterns:
+          - "~DEFAULT_BRANCH"  # Matches the default branch (main)
+
+        rules:
+          creation: false
+          update: true  # Require pull request
+          deletion: true  # Block deletion
+          required_linear_history: true
+          required_signatures: false
+          non_fast_forward: true  # Prevent force pushes
+
+          pull_request:
+            required_approving_review_count: 1
+            dismiss_stale_reviews_on_push: true
+            require_code_owner_review: false
+            require_last_push_approval: false
+            required_review_thread_resolution: true
+
+          required_status_checks:
+            strict_required_status_checks_policy: true
+            required_checks: []
+              # - context: "ci/terraform-validate"
+              # - context: "ci/tests"
