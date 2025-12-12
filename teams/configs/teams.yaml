@@ -1,0 +1,55 @@
+teams:
+  # GitHub Teams Configuration
+  # Define teams, their members, and repository access
+
+  # Example team structure:
+  # team-name:
+  #   name: "Team Display Name"
+  #   description: "Team description"
+  #   privacy: "closed"  # closed or secret
+  #   members:
+  #     - username: "user1"
+  #       role: "maintainer"  # maintainer or member
+  #     - username: "user2"
+  #       role: "member"
+  #   repositories:
+  #     - repository: "repo-name"
+  #       permission: "push"  # pull, triage, push, maintain, admin
+
+  core-team:
+    name: "Core Team"
+    description: "Core maintainers with full access to the organization"
+    privacy: "closed"
+    members:
+      # Add team members here
+      - username: "myuser"
+        role: "maintainer"
+    repositories:
+      - repository: ".github"
+        permission: "admin"
+
+  external-access:
+    name: "External Access"
+    description: "External collaborators with read access to specific private repositories"
+    privacy: "closed"
+    members:
+      # Add external collaborators here
+      # External users can access private repos without being organization members
+      - username: "myuser"
+        role: "member"
+    repositories:
+      # Grant access to specific private repositories
+      - repository: ".github"
+        permission: "pull"  # Read-only access
+      # For write access, use:
+      # - repository: "another-private-repo"
+      #   permission: "push"
+
+  # contributors:
+  #   name: "Contributors"
+  #   description: "Community contributors with write access to public repositories"
+  #   privacy: "closed"
+  #   members: []
+  #   repositories:
+  #     - repository: "github-org-managment-examples"
+  #       permission: "push"
