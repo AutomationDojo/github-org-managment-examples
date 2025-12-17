@@ -1,0 +1,91 @@
+site_name: GitHub Organization Management Examples
+site_description: Example configurations and templates for GitHub organization management with Terraform
+site_author: Automation Dojo
+site_url: https://github-org-management.automationdojo.org/
+
+repo_name: automationDojo/github-org-management-examples
+repo_url: https://github.com/automationDojo/github-org-management-examples
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - glightbox
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/automationDojo
+
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - Prerequisites: prerequisites.md
+  - Modules:
+      - Organization Settings: modules/organization.md
+      - Repositories: modules/repositories.md
+      - Rulesets: modules/rulesets.md
+      - Teams: modules/teams.md
+  - Guides:
+      - Getting Started: guides/getting-started.md
+      - Authentication: guides/authentication.md
+      - Deployment: guides/deployment.md
+  - Examples:
+      - Basic Setup: examples/basic-setup.md
+      - Advanced Configuration: examples/advanced-config.md
+      - Best Practices: examples/best-practices.md
+  - Reference:
+      - YAML Schema: reference/yaml-schema.md
+      - Troubleshooting: reference/troubleshooting.md
